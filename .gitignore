@@ -1,0 +1,5 @@
+.env
+.venv
+certificates/*
+**/__pycache__/
+CSV/*
