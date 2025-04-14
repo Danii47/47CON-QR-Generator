@@ -102,7 +102,7 @@ def get_email_body(user_name):
           </ul>
           <b>Ubicación:</b> <a href="https://maps.app.goo.gl/YsyVtZ4maHd4ck5V9">Escuela de Ingeniería Informática de la Universidad de Valladolid</a>
           <br>
-          <i>Puedes consultar el resto de informacion en nuestra página: <a href="https://sugusuva.es/47CON" target="_blank">SUGUS</a></i>
+          <i>Puedes consultar el resto de informacion como el horario y las ponencias en nuestra página: <a href="https://sugusuva.es/47CON" target="_blank">SUGUS</a></i>
         </p>
       </body>
     </html>
