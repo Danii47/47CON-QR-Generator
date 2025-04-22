@@ -1,5 +1,5 @@
 
-from functions.utils import read_csv, send_mail, generate_qr, sha256, get_email_body, encrypt
+from functions.utils import read_csv, send_mail, generate_qr, sha256, get_email_body, encrypt, capitalize_all
 import firebase_admin
 from firebase_admin import credentials, firestore
 from config import (
@@ -31,8 +31,10 @@ def main():
   
   for name, surname, email, phone, dni in users:
     dni = dni.lower()
+    name_and_surname = capitalize_all(f"{name} {surname}")
+    email = email.lower()
 
-    print(f"{YELLOW}Usuario: {name} {surname} | Email: {email} | Móvil: {phone} | DNI: {dni}{RESET}")
+    print(f"{YELLOW}Usuario: {name_and_surname} | Email: {email} | Móvil: {phone} | DNI: {dni}{RESET}")
 
     try:
       qr_data = sha256(dni + SECRET_KEY)
@@ -42,35 +44,35 @@ def main():
       doc_ref.set({
         "dni": encrypted_dni,
         "email": email,
-        "name": f"{name} {surname}",
+        "name": name_and_surname,
         "phone": phone,
         "used": False
       })
       
       print(f"\t{GREEN}Usuario añadido a Firebase{RESET}")
       
-      response = requests.post(
-        "https://sugusuva.es/api/v1/participants",
-        json={
-          "dni": dni.upper(),
-          "name": name,
-          "surname": surname,
-          "email": email,
-          "telephone": phone,
-          "prefix": "+34"
-        },
-        verify=False
-      )
+      # response = requests.post(
+      #   "https://sugusuva.es/api/v1/participants",
+      #   json={
+      #     "dni": dni.upper(),
+      #     "name": name.capitalize(),
+      #     "surname": surname.capitalize(),
+      #     "email": email,
+      #     "telephone": phone,
+      #     "prefix": "+34"
+      #   },
+      #   verify=False
+      # )
       
-      if response.status_code != 200:
-        raise Exception(f"\t{RED}Error al añadir el usuario a la BDD de SUGUS: {response.status_code}\n{response.text}{RESET}")
+      # if response.status_code != 200:
+      #   raise Exception(f"\t{RED}Error al añadir el usuario a la BDD de SUGUS: {response.status_code}\n{response.text}{RESET}")
       
-      print(f"\t{GREEN}Usuario añadido a la BDD de SUGUS{RESET}")
+      # print(f"\t{GREEN}Usuario añadido a la BDD de SUGUS{RESET}")
       
       qr_code = generate_qr(qr_data)
       body = get_email_body(name)
       
-      #send_mail(EMAIL_FROM, email, EMAIL_SUBJECT, body, qr_code)
+      # send_mail(EMAIL_FROM, email, EMAIL_SUBJECT, body, qr_code)
       print(f"\t{GREEN}Email enviado correctamente{RESET}")
 
     except Exception as e:

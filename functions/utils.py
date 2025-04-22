@@ -118,3 +118,6 @@ def encrypt(data, key):
   padded_data = pad(data)
   encrypted_bytes = cipher.encrypt(padded_data.encode("utf-8"))
   return base64.b64encode(iv + encrypted_bytes).decode("utf-8")
+
+def capitalize_all(texto):
+    return ' '.join(palabra.capitalize() for palabra in texto.split())
