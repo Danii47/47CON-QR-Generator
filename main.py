@@ -72,7 +72,7 @@ def main():
       qr_code = generate_qr(qr_data)
       body = get_email_body(name)
       
-      # send_mail(EMAIL_FROM, email, EMAIL_SUBJECT, body, qr_code)
+      send_mail(EMAIL_FROM, email, EMAIL_SUBJECT, body, qr_code)
       print(f"\t{GREEN}Email enviado correctamente{RESET}")
 
     except Exception as e:

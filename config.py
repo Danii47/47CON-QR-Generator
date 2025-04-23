@@ -8,7 +8,7 @@ load_dotenv()
 FIREBASE_CREDENTIALS_PATH = "certificates/db-connection-private-key.json"
 
 # CSV
-CSV_FILE_PATH = "CSV/inscriptions-test.csv"
+CSV_FILE_PATH = "CSV/inscriptions.csv"
 CSV_COLUMNS = ["name", "surname", "email", "phone", "dni"]
 
 # Email
